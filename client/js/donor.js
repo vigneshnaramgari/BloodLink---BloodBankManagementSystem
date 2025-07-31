@@ -6,7 +6,7 @@ if (!token || role !== 'donor') {
   window.location.href = 'login.html';
 }
 
-const apiUrl = 'http://localhost:5000/api/donor';
+const apiUrl = 'https://bloodlink-f53w.onrender.com/api/donor';
 
 const donationForm = document.getElementById('donationForm');
 donationForm.addEventListener('submit', async (e) => {

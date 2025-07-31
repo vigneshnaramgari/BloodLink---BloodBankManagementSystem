@@ -1,4 +1,4 @@
-const backendUrl = 'http://localhost:5000/api/auth';
+const backendUrl = 'https://bloodlink-f53w.onrender.com/api/auth';
 
 document.addEventListener('DOMContentLoaded', function() {
   const passwordToggles = document.querySelectorAll('.password-toggle');

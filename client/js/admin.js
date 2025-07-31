@@ -1,6 +1,6 @@
 const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
-const apiUrl = 'http://localhost:5000/api/admin';
+const apiUrl = 'https://bloodlink-f53w.onrender.com/api/admin';
 
 if (!token || role !== 'admin') {
   alert('Access denied. Admin privileges required.');

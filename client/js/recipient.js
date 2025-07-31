@@ -1,5 +1,5 @@
 const token = localStorage.getItem('token');
-const apiUrl = 'http://localhost:5000/api/recipient';
+const apiUrl = 'https://bloodlink-f53w.onrender.com/api/recipient';
 
 if (!token || localStorage.getItem('role') !== 'recipient') {
   alert('Unauthorized access');
