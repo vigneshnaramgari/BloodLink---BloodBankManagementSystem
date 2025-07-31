@@ -810,11 +810,17 @@ body {
     }
 
     .nav-brand h5 {
-        display: none;
+        display: block;
+        font-size: 0.8rem;
+        margin: 0;
+        line-height: 1.2;
     }
     
     .nav-brand {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
     }
 
     .nav-links {
@@ -956,7 +962,10 @@ body {
     }
     
     .nav-brand {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.1rem;
     }
     
     .nav-links {
@@ -1044,6 +1053,11 @@ body {
     
     .nav-brand i {
         margin-right: 5px;
+    }
+    
+    .nav-brand h5 {
+        font-size: 0.7rem;
+        line-height: 1.1;
     }
     
     .auth-card {
