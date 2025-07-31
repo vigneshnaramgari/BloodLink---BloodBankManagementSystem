@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - BloodLink</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>body { display: none; }</style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="dashboard-header">
+      <div class="dashboard-nav">
+        <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+        <div class="user-info">
+          <span>Welcome, Administrator</span>
+          <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="totalUsers">0</h3>
+            <p>Total Users</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="totalDonors">0</h3>
+            <p>Donors</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-user-injured"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="totalRecipients">0</h3>
+            <p>Recipients</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="pendingRequests">0</h3>
+            <p>Pending Requests</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="pendingDonations">0</h3>
+            <p>Pending Donations</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-tint"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="totalInventory">0</h3>
+            <p>Total Inventory (ml)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-navigation">
+      <button class="tab-btn active" onclick="showTab('requests', event)">
+        <i class="fas fa-clipboard-list"></i> Blood Requests
+      </button>
+      <button class="tab-btn" onclick="showTab('donations', event)">
+        <i class="fas fa-heart"></i> Donations
+      </button>
+      <button class="tab-btn" onclick="showTab('inventory', event)">
+        <i class="fas fa-boxes"></i> Inventory
+      </button>
+      <button class="tab-btn" onclick="showTab('users', event)">
+        <i class="fas fa-users"></i> Users
+      </button>
+    </div>
+
+    <div class="tab-content">
+      <div id="requests-tab" class="tab-panel active">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <h3><i class="fas fa-clipboard-list"></i> Blood Requests</h3>
+            <button class="refresh-btn" onclick="loadRequests()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Recipient</th>
+                  <th>Blood Type</th>
+                  <th>Units</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="requestList"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="donations-tab" class="tab-panel">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <h3><i class="fas fa-heart"></i> Donations</h3>
+            <button class="refresh-btn" onclick="loadDonations()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Donor</th>
+                  <th>Date</th>
+                  <th>Location</th>
+                  <th>Blood Type</th>
+                  <th>Units</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="donationList"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="inventory-tab" class="tab-panel">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <h3><i class="fas fa-boxes"></i> Blood Inventory</h3>
+            <button class="refresh-btn" onclick="loadInventory()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Blood Type</th>
+                  <th>Available Units</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryList"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="users-tab" class="tab-panel">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <h3><i class="fas fa-users"></i> Users</h3>
+            <button class="refresh-btn" onclick="loadUsers()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Blood Type</th>
+                  <th>Location</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="userList"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Confirm Action</h3>
+        <span class="close" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p id="modalMessage">Are you sure you want to perform this action?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" id="confirmBtn" onclick="executeAction()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function enforceAdminAuth() {
+      const token = localStorage.getItem('token');
+      const role = localStorage.getItem('role');
+      if (!token || role !== 'admin') {
+        alert('Access denied. Admin privileges required.');
+        window.location.href = 'login.html';
+      } else {
+        document.body.style.display = 'block';
+      }
+    })();
+  </script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
